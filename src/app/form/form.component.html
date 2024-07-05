@@ -1,0 +1,101 @@
+<form
+  (ngSubmit)="onSubmit()"
+  [formGroup]="formState"
+  class="form"
+  action="#"
+>
+  <h1 class="tui-text_h4">
+    Создание пользователя
+  </h1>
+  <div class="row">
+    <tui-input formControlName="name">
+      Введите имя
+    </tui-input>
+    @if (formState.get('name')?.getError('required') && formState.get('name')?.touched ) {
+      <span class="form__invalid invalid tui-text_body-m">
+        Заполните поле
+      </span>
+    }
+  </div>
+ <div class="row">
+    <tui-input formControlName="surname">
+      Введите фамилию
+    </tui-input>
+    @if (formState.get('surname')?.getError('required') && formState.get('surname')?.touched ) {
+      <span class="form__invalid invalid tui-text_body-m">
+        Заполните поле
+      </span>
+    }
+ </div>
+  <div class="row">
+    <tui-select formControlName="lang">
+      Выберите язык интерфейса
+      <tui-data-list-wrapper
+          *tuiDataList
+          [items]="options"
+      ></tui-data-list-wrapper>
+    </tui-select>
+  </div>
+  <div
+    tuiGroup
+    class="group"
+    [collapsed]="true"
+  >
+    <tui-radio-block
+      [hideRadio]="true"
+      formControlName="role"
+      item="Пользователь"
+    >
+      Пользователь
+    </tui-radio-block>
+    <tui-radio-block
+      [hideRadio]="true"
+      formControlName="role"
+      item="Администратор"
+    >
+      Администратор
+    </tui-radio-block>
+  </div>
+  <div class="form__wrapper-button row">
+    <button
+      appearance="primary"
+      tuiButton
+      type="button"
+      (click)="addSkill()"
+    >
+      Добавить умение
+    </button>
+    @if (formState.get('skills')?.hasError('maxLengthArray')) {
+      <span class="invalid tui-text_body-m">
+        Желательно не больше 3х умений
+      </span>
+    }
+  </div>
+  @if (formState.get('skills')?.value?.length) {
+    <div class="skills" formArrayName="skills">
+      
+      @for (skill of skills.controls; track $index) {
+        <div class="skills__item row">
+          <tui-input class="skills__textfield" [formControlName]="$index">
+            Введите имя
+          </tui-input>
+          <button
+            appearance="flat"
+            (click)="removeSkill($index)"
+            tuiIconButton
+            type="button"
+            [icon]="iconTrash"
+          ></button>
+        </div>
+      }
+    </div>
+  }
+  <button
+    appearance="primary"
+    tuiButton
+    type="submit"
+    [disabled]="isDisabled()"
+  >
+    Создать
+  </button>
+</form>

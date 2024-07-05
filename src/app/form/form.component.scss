@@ -1,0 +1,45 @@
+.form {
+  display: flex;
+  flex-direction: column;
+  max-width: 528px;
+  gap: 48px;
+  align-items: flex-start;
+}
+
+.form__invalid {
+  position: absolute;
+  top: 100%;
+  left: 0;
+}
+
+.form__wrapper-button {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  align-items: flex-start;
+}
+
+.row {
+  position: relative;
+  width: 100%;
+}
+
+.skills {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+}
+
+.skills__item {
+  display: flex;
+}
+
+.skills__textfield {
+  flex: auto;
+}
+
+.invalid {
+  color: var(--tui-error-fill);
+  display: block;
+}
