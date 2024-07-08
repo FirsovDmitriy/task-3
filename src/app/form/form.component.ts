@@ -58,10 +58,8 @@ export class FormComponent {
   }
 
   onSubmit() {
-    const { formState } = this
-    const toString = JSON.stringify(formState.value)
-    console.log(toString)
-    formState.reset()
+    console.log(this.formState.value);
+    this.formState.reset()
   }
 
   isDisabled(): boolean {
